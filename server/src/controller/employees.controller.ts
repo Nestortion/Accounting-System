@@ -12,7 +12,7 @@ export const updateEmployee = (req:Request, res: Response) =>{
 
 
 }
-export const toggleEmployeeIsActive = (req:Request, res: Response) =>{
+export const terminateEmployee = (req:Request, res: Response) =>{
 
 
 }
