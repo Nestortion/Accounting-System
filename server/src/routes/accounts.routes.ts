@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createAccount, getAccounts, updateAccount,toggleAccountIsActive } from "../controller/accounts.controller";
+import { createAccount, getAccounts, updateAccount,toggleAccountIsActive } from "../controller/accounts.controller.ts";
 
 const accountRouter = Router()
 

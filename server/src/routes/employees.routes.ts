@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createEmployee, getEmployees, updateEmployee,toggleEmployeeIsActive } from "../controller/employees.controller";
+import { createEmployee, getEmployees, updateEmployee,toggleEmployeeIsActive } from "../controller/employees.controller.ts";
 
 const employeesRouter = Router()
 
