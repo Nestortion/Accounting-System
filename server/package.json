@@ -9,7 +9,8 @@
     "dev": "nodemon src/index.ts",
     "push": "drizzle-kit push:mysql",
     "generate": "drizzle-kit generate:mysql",
-    "migrate": "tsx migrate.ts"
+    "migrate": "tsx migrate.ts",
+    "studio": "drizzle-kit studio --verbose"
   },
   "keywords": [],
   "author": "",
@@ -18,16 +19,19 @@
     "@types/dotenv": "^8.2.0",
     "drizzle-orm": "^0.30.4",
     "express": "^4.18.3",
-    "mysql2": "^3.9.2"
+    "mysql2": "^3.9.2",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
     "@types/node": "^20.11.30",
     "@types/nodemon": "^1.19.6",
+    "@types/supertest": "^6.0.2",
     "@vitest/ui": "^1.4.0",
     "dotenv": "^16.4.5",
     "drizzle-kit": "^0.20.14",
     "nodemon": "^3.1.0",
+    "supertest": "^6.3.4",
     "ts-node": "^10.9.2",
     "tsx": "^4.7.1",
     "vitest": "^1.4.0"

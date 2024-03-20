@@ -1,15 +1,16 @@
+import "dotenv/config";
+import { MySqlTable } from "drizzle-orm/mysql-core";
 import { drizzle } from "drizzle-orm/mysql2";
 import mysql from "mysql2/promise";
 import accounts from "./schema/accounts.schema.ts";
-import employees from "./schema/employees.schema.ts";
-import users from "./schema/users.schema.ts";
 import cheques from "./schema/cheques.schema.ts";
 import customers from "./schema/customers.schema.ts";
-import vendors from "./schema/vendors.schema.ts";
-import payrolls from "./schema/payrolls.schema.ts";
+import employees from "./schema/employees.schema.ts";
 import inventory from "./schema/inventory.schema.ts";
+import payrolls from "./schema/payrolls.schema.ts";
 import transactions from "./schema/transactions.schema.ts";
-import { MySqlTable } from "drizzle-orm/mysql-core";
+import users from "./schema/users.schema.ts";
+import vendors from "./schema/vendors.schema.ts";
 
 type DBSchema = {
   accounts: MySqlTable;

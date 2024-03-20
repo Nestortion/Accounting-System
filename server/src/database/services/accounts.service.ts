@@ -1,53 +1,78 @@
-import db from '../index.ts'
-import crypto from 'crypto'
-import accounts from '../schema/accounts.schema.ts'
-import { eq } from 'drizzle-orm'
+import db from "../index.ts";
+import accounts from "../schema/accounts.schema.ts";
+import { eq, not } from "drizzle-orm";
+
+const ACCOUNT_TYPE = {
+  RECEIVABLE: "RECEIVABLE",
+  PAYABLE: "PAYABLE",
+  REVENUE: "REVENUE",
+  EXPENSE: "EXPENSE",
+} as const;
+
+type ObjectTypes<T> = T[keyof T];
+
+type AccountType = ObjectTypes<typeof ACCOUNT_TYPE>;
 
 export const getAllAccounts = async () => {
+  const accounts = await db.query.accounts.findMany();
 
-    const accounts = await db.query.accounts.findMany()
+  return accounts;
+};
 
-    return accounts
+export const getAccountByID = async (accId: string) => {
+  const account = await db.query.accounts.findFirst({
+    where: (account) => eq(account.accId, accId),
+  });
 
-}
+  return account;
+};
 
 export const addAccount = async (input: {
-    accType: string,
-    accDescription: string,
+  accId: string;
+  accType: AccountType;
+  accDescription: string;
+  accAmount: number;
 }) => {
+  await db.insert(accounts).values(input);
 
-    const newAccountId = `accId ${crypto.randomUUID()}`;
+  const newAccount = await db.query.accounts.findFirst({
+    where: (account) => eq(account.accId, input.accId),
+  });
 
-    await db.insert(accounts).values({ ...input, accId: newAccountId })
+  return newAccount;
+};
 
-    const newAccount = await db.query.accounts.findFirst({ where: (account) => eq(account.accId, newAccountId) })
-
-    return newAccount
-}
-
-export const updateAccount = async (input: {
-    accId: string,
-    newData: {
-        accType?: string,
-        accDescription?: string
-    }
+export const editAccount = async (input: {
+  accId: string;
+  newData: {
+    accType?: AccountType;
+    accDescription?: string;
+    accAmount?: number;
+  };
 }) => {
-    await db.update(accounts).set(input.newData).where(eq(accounts.accId,input.accId))
+  await db
+    .update(accounts)
+    .set({ ...input.newData, accUpdatedAt: new Date() })
+    .where(eq(accounts.accId, input.accId));
 
-    const updatedAcc = await db.query.accounts.findFirst({where:(acc)=>eq(acc.accId,input.accId)})
+  const updatedAcc = await db.query.accounts.findFirst({
+    where: (acc) => eq(acc.accId, input.accId),
+  });
 
-    return updatedAcc
+  return updatedAcc;
+};
 
-}
+export const updateAccountIsActive = async (input: { accId: string }) => {
+  await db
+    .update(accounts)
+    .set({
+      accIsActive: not(accounts.accIsActive),
+    })
+    .where(eq(accounts.accId, input.accId));
 
-export const toggleAccountIsActive = async (input: {
-    accId: string
-}) =>{
+  const updatedAcc = await db.query.accounts.findFirst({
+    where: (acc) => eq(acc.accId, input.accId),
+  });
 
-    await db.update(accounts).set({accIsActive: !accounts.accIsActive}).where(eq(accounts.accId,input.accId))
-
-    const updatedAcc = await db.query.accounts.findFirst({where:(acc)=>eq(acc.accId,input.accId)})
-
-    return updatedAcc
-
-}
+  return updatedAcc;
+};

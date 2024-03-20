@@ -1,18 +1,23 @@
 import { Router } from "express";
-import { createAccount, getAccounts, updateAccount,toggleAccountIsActive } from "../controller/accounts.controller.ts";
+import {
+  createAccount,
+  getAccounts,
+  updateAccount,
+  toggleAccountIsActive,
+} from "../controller/accounts.controller.ts";
 
-const accountRouter = Router()
+const accountRouter = Router();
 
 //get all accounts
-accountRouter.get('/', getAccounts)
+accountRouter.get("/", getAccounts);
 
 //create an account entry
-accountRouter.post('/',createAccount)
+accountRouter.post("/", createAccount);
 
 //update an account
-accountRouter.put('/',updateAccount)
+accountRouter.put("/", updateAccount);
 
 //delete but update account isactive instead
-accountRouter.put('/:accountID',toggleAccountIsActive)
+accountRouter.put("/:accId", toggleAccountIsActive);
 
-export default accountRouter
+export default accountRouter;
