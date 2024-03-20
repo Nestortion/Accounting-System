@@ -3,7 +3,7 @@ import { MySqlTable } from "drizzle-orm/mysql-core";
 import { drizzle } from "drizzle-orm/mysql2";
 import mysql from "mysql2/promise";
 import accounts from "./schema/accounts.schema.ts";
-import cheques from "./schema/cheques.schema.ts";
+import cheques, { chequesRelations } from "./schema/cheques.schema.ts";
 import customers from "./schema/customers.schema.ts";
 import employees from "./schema/employees.schema.ts";
 import inventory from "./schema/inventory.schema.ts";
@@ -11,6 +11,7 @@ import payrolls from "./schema/payrolls.schema.ts";
 import transactions from "./schema/transactions.schema.ts";
 import users from "./schema/users.schema.ts";
 import vendors from "./schema/vendors.schema.ts";
+import { Relations } from "drizzle-orm";
 
 type DBSchema = {
   accounts: MySqlTable;
@@ -22,6 +23,7 @@ type DBSchema = {
   inventory: MySqlTable;
   transactions: MySqlTable;
   payrolls: MySqlTable;
+  chequesRelations: Relations;
 };
 
 export const connection = mysql.createPool({
@@ -43,6 +45,7 @@ const db = drizzle(connection, {
     transactions,
     inventory,
     payrolls,
+    chequesRelations,
   } as DBSchema,
   mode: "default",
 });

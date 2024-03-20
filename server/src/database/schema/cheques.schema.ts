@@ -8,6 +8,7 @@ import {
   varchar,
 } from "drizzle-orm/mysql-core";
 import accounts from "./accounts.schema.ts";
+import { relations } from "drizzle-orm";
 
 const cheques = mysqlTable("cheques", {
   chqId: varchar("chq_id", { length: 60 }).primaryKey(),
@@ -23,5 +24,12 @@ const cheques = mysqlTable("cheques", {
   chqCreatedAt: datetime("chq_created_at").notNull().default(new Date()),
   chqUpdatedAt: datetime("chq_updated_at").notNull().default(new Date()),
 });
+
+export const chequesRelations = relations(cheques, ({ one }) => ({
+  account: one(accounts, {
+    fields: [cheques.chqAccId],
+    references: [accounts.accId],
+  }),
+}));
 
 export default cheques;

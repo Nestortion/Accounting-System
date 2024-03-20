@@ -3,7 +3,6 @@ import z from "zod";
 import {
   addAccount,
   editAccount,
-  getAccountByID,
   getAllAccounts,
   updateAccountIsActive,
 } from "../database/services/accounts.service";
@@ -33,9 +32,7 @@ export const createAccount = async (req: Request, res: Response) => {
   try {
     const newAccountId = `accId ${crypto.randomUUID()}`;
 
-    await addAccount({ ...input.data, accId: newAccountId });
-
-    const newAccount = await getAccountByID(newAccountId);
+    const newAccount = await addAccount({ ...input.data, accId: newAccountId });
 
     return res.status(200).send({ account: newAccount });
   } catch (error) {
@@ -76,9 +73,7 @@ export const updateAccount = async (req: Request, res: Response) => {
     });
 
   try {
-    await editAccount(input.data);
-
-    const editedAccount = await getAccountByID(input.data.accId);
+    const editedAccount = await editAccount(input.data);
 
     return res.status(200).send({ account: editedAccount });
   } catch (error) {
@@ -110,9 +105,7 @@ export const toggleAccountIsActive = async (req: Request, res: Response) => {
       error: input.error.errors[0].message,
     });
 
-  await updateAccountIsActive({ ...input.data });
-
-  const editedAccount = await getAccountByID(input.data.accId);
+  const editedAccount = await updateAccountIsActive({ ...input.data });
 
   return res.status(200).send({
     account: editedAccount,

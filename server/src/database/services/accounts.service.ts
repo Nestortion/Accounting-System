@@ -14,7 +14,11 @@ type ObjectTypes<T> = T[keyof T];
 type AccountType = ObjectTypes<typeof ACCOUNT_TYPE>;
 
 export const getAllAccounts = async () => {
-  const accounts = await db.query.accounts.findMany();
+  const accounts = await db.query.accounts.findMany({
+    with: { cheques: true },
+  });
+
+  console.log(accounts);
 
   return accounts;
 };
