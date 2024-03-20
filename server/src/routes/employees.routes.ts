@@ -1,18 +1,23 @@
 import { Router } from "express";
-import { createEmployee, getEmployees, updateEmployee,toggleEmployeeIsActive } from "../controller/employees.controller.ts";
+import {
+  createEmployee,
+  getEmployees,
+  updateEmployee,
+  terminateEmployee,
+} from "../controller/employees.controller.ts";
 
-const employeesRouter = Router()
+const employeesRouter = Router();
 
 //get all employees
-employeesRouter.get('/', getEmployees)
+employeesRouter.get("/", getEmployees);
 
 //create an employees entry
-employeesRouter.post('/',createEmployee)
+employeesRouter.post("/", createEmployee);
 
 //update an employees
-employeesRouter.put('/',updateEmployee)
+employeesRouter.put("/", updateEmployee);
 
 //delete but update employees isactive instead
-employeesRouter.put('/:employeesID',toggleEmployeeIsActive)
+employeesRouter.put("/:employeesID", terminateEmployee);
 
-export default employeesRouter
+export default employeesRouter;
