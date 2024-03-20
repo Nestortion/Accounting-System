@@ -3,8 +3,8 @@ CREATE TABLE `accounts` (
 	`acc_type` varchar(20) NOT NULL,
 	`acc_description` text NOT NULL,
 	`acc_is_active` boolean NOT NULL DEFAULT true,
-	`acc_created_at` datetime NOT NULL DEFAULT '2024-03-20 02:44:26.687',
-	`acc_updated_at` datetime NOT NULL DEFAULT '2024-03-20 02:44:26.687',
+	`acc_created_at` datetime NOT NULL DEFAULT '2024-03-20 04:42:58.305',
+	`acc_updated_at` datetime NOT NULL DEFAULT '2024-03-20 04:42:58.305',
 	CONSTRAINT `accounts_acc_id` PRIMARY KEY(`acc_id`)
 );
 --> statement-breakpoint
@@ -16,8 +16,8 @@ CREATE TABLE `cheques` (
 	`chq_description` text NOT NULL,
 	`chq_status` enum('APPROVED','PENDING','REJECTED'),
 	`chq_account_id` varchar(40),
-	`chq_created_at` datetime NOT NULL DEFAULT '2024-03-20 02:44:26.692',
-	`chq_updated_at` datetime NOT NULL DEFAULT '2024-03-20 02:44:26.692',
+	`chq_created_at` datetime NOT NULL DEFAULT '2024-03-20 04:42:58.310',
+	`chq_updated_at` datetime NOT NULL DEFAULT '2024-03-20 04:42:58.310',
 	CONSTRAINT `cheques_chq_id` PRIMARY KEY(`chq_id`)
 );
 --> statement-breakpoint
@@ -73,8 +73,8 @@ CREATE TABLE `transactions` (
 	`tran_vendor_id` varchar(40),
 	`tran_customer_id` varchar(40),
 	`tran_transaction_date` datetime NOT NULL,
-	`tran_created_at` datetime NOT NULL DEFAULT '2024-03-20 02:44:26.715',
-	`tran_updated_at` datetime NOT NULL DEFAULT '2024-03-20 02:44:26.715',
+	`tran_created_at` datetime NOT NULL DEFAULT '2024-03-20 04:42:58.335',
+	`tran_updated_at` datetime NOT NULL DEFAULT '2024-03-20 04:42:58.335',
 	CONSTRAINT `transactions_tran_id` PRIMARY KEY(`tran_id`)
 );
 --> statement-breakpoint
@@ -98,9 +98,9 @@ CREATE TABLE `vendors` (
 	CONSTRAINT `vendors_vd_email_unique` UNIQUE(`vd_email`)
 );
 --> statement-breakpoint
-ALTER TABLE `cheques` ADD CONSTRAINT `cheques_chq_account_id_accounts_acc_id_fk` FOREIGN KEY (`chq_account_id`) REFERENCES `accounts`(`acc_id`) ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE `payrolls` ADD CONSTRAINT `payrolls_pr_employee_id_employees_emp_id_fk` FOREIGN KEY (`pr_employee_id`) REFERENCES `employees`(`emp_id`) ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE `transactions` ADD CONSTRAINT `transactions_tran_account_id_accounts_acc_id_fk` FOREIGN KEY (`tran_account_id`) REFERENCES `accounts`(`acc_id`) ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE `transactions` ADD CONSTRAINT `transactions_tran_employee_id_employees_emp_id_fk` FOREIGN KEY (`tran_employee_id`) REFERENCES `employees`(`emp_id`) ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE `transactions` ADD CONSTRAINT `transactions_tran_vendor_id_vendors_vd_id_fk` FOREIGN KEY (`tran_vendor_id`) REFERENCES `vendors`(`vd_id`) ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE `transactions` ADD CONSTRAINT `transactions_tran_customer_id_customers_cust_id_fk` FOREIGN KEY (`tran_customer_id`) REFERENCES `customers`(`cust_id`) ON DELETE no action ON UPDATE no action;
+ALTER TABLE `cheques` ADD CONSTRAINT `cheques_chq_account_id_accounts_acc_id_fk` FOREIGN KEY (`chq_account_id`) REFERENCES `accounts`(`acc_id`) ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE `payrolls` ADD CONSTRAINT `payrolls_pr_employee_id_employees_emp_id_fk` FOREIGN KEY (`pr_employee_id`) REFERENCES `employees`(`emp_id`) ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE `transactions` ADD CONSTRAINT `transactions_tran_account_id_accounts_acc_id_fk` FOREIGN KEY (`tran_account_id`) REFERENCES `accounts`(`acc_id`) ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE `transactions` ADD CONSTRAINT `transactions_tran_employee_id_employees_emp_id_fk` FOREIGN KEY (`tran_employee_id`) REFERENCES `employees`(`emp_id`) ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE `transactions` ADD CONSTRAINT `transactions_tran_vendor_id_vendors_vd_id_fk` FOREIGN KEY (`tran_vendor_id`) REFERENCES `vendors`(`vd_id`) ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE `transactions` ADD CONSTRAINT `transactions_tran_customer_id_customers_cust_id_fk` FOREIGN KEY (`tran_customer_id`) REFERENCES `customers`(`cust_id`) ON DELETE cascade ON UPDATE no action;

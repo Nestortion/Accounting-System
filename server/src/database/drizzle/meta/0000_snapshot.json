@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "45822435-968b-43b0-89a1-066f30383852",
+  "id": "a8929e2e-9d85-4a75-a95b-b3ff570d5cce",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "accounts": {
@@ -42,7 +42,7 @@
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false,
-          "default": "'2024-03-20 02:44:26.687'"
+          "default": "'2024-03-20 04:42:58.305'"
         },
         "acc_updated_at": {
           "name": "acc_updated_at",
@@ -50,7 +50,7 @@
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false,
-          "default": "'2024-03-20 02:44:26.687'"
+          "default": "'2024-03-20 04:42:58.305'"
         }
       },
       "indexes": {},
@@ -123,7 +123,7 @@
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false,
-          "default": "'2024-03-20 02:44:26.692'"
+          "default": "'2024-03-20 04:42:58.310'"
         },
         "chq_updated_at": {
           "name": "chq_updated_at",
@@ -131,7 +131,7 @@
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false,
-          "default": "'2024-03-20 02:44:26.692'"
+          "default": "'2024-03-20 04:42:58.310'"
         }
       },
       "indexes": {},
@@ -146,7 +146,7 @@
           "columnsTo": [
             "acc_id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
@@ -414,7 +414,7 @@
           "columnsTo": [
             "emp_id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
@@ -493,7 +493,7 @@
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false,
-          "default": "'2024-03-20 02:44:26.715'"
+          "default": "'2024-03-20 04:42:58.335'"
         },
         "tran_updated_at": {
           "name": "tran_updated_at",
@@ -501,7 +501,7 @@
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false,
-          "default": "'2024-03-20 02:44:26.715'"
+          "default": "'2024-03-20 04:42:58.335'"
         }
       },
       "indexes": {},
@@ -516,7 +516,7 @@
           "columnsTo": [
             "acc_id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         },
         "transactions_tran_employee_id_employees_emp_id_fk": {
@@ -529,7 +529,7 @@
           "columnsTo": [
             "emp_id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         },
         "transactions_tran_vendor_id_vendors_vd_id_fk": {
@@ -542,7 +542,7 @@
           "columnsTo": [
             "vd_id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         },
         "transactions_tran_customer_id_customers_cust_id_fk": {
@@ -555,7 +555,7 @@
           "columnsTo": [
             "cust_id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
