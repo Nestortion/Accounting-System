@@ -1,7 +1,6 @@
 import {
   AnyMySqlColumn,
   datetime,
-  int,
   mysqlTable,
   text,
   varchar,
@@ -10,6 +9,7 @@ import employees from "./employees.schema.ts";
 import accounts from "./accounts.schema.ts";
 import vendors from "./vendors.schema.ts";
 import customers from "./customers.schema.ts";
+import { decimal } from "drizzle-orm/mysql-core";
 
 const transactions = mysqlTable("transactions", {
   tranId: varchar("tran_id", { length: 60 }).primaryKey(),
@@ -17,7 +17,7 @@ const transactions = mysqlTable("transactions", {
     .references((): AnyMySqlColumn => accounts.accId, { onDelete: "cascade" })
     .notNull(),
   tranDescription: text("tran_description").notNull(),
-  tranAmount: int("tran_amount").notNull(),
+  tranAmount: decimal("tran_amount").notNull(),
   tranEmpId: varchar("tran_employee_id", { length: 60 }).references(
     (): AnyMySqlColumn => employees.empId,
     { onDelete: "cascade" }

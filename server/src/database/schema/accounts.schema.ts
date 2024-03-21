@@ -1,7 +1,7 @@
+import { decimal } from "drizzle-orm/mysql-core";
 import {
   boolean,
   datetime,
-  int,
   mysqlEnum,
   mysqlTable,
   text,
@@ -16,7 +16,7 @@ const accounts = mysqlTable("accounts", {
     "REVENUE",
     "EXPENSE",
   ]).notNull(),
-  accAmount: int("acc_amount").notNull(),
+  accAmount: decimal("acc_amount").notNull(),
   accDescription: text("acc_description").notNull(),
   accIsActive: boolean("acc_is_active").notNull().default(true),
   accCreatedAt: datetime("acc_created_at").notNull().default(new Date()),
