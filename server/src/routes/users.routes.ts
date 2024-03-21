@@ -1,18 +1,23 @@
 import { Router } from "express";
-import { createUser, getUsers, updateUser,toggleUserIsActive } from "../controller/users.controller.ts";
+import {
+  createUser,
+  getUsers,
+  updateUser,
+  toggleUserIsActive,
+} from "../controller/users.controller.ts";
 
-const usersRouter = Router()
+const usersRouter = Router();
 
 //get all users
-usersRouter.get('/', getUsers)
+usersRouter.get("/", getUsers);
 
 //create an users entry
-usersRouter.post('/',createUser)
+usersRouter.post("/", createUser);
 
 //update an users
-usersRouter.put('/',updateUser)
+usersRouter.put("/", updateUser);
 
 //delete but update users isactive instead
-usersRouter.put('/:usersID',toggleUserIsActive)
+usersRouter.put("/:userId", toggleUserIsActive);
 
-export default usersRouter
+export default usersRouter;

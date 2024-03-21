@@ -4,7 +4,10 @@ import {
   editCheque,
   getAllCheques,
 } from "../database/services/cheques.service";
-import { createValidator, updateValidator } from "../utils/cheque.validator";
+import {
+  createValidator,
+  updateValidator,
+} from "../utils/validators/cheques.validator";
 
 export const getCheques = async (req: Request, res: Response) => {
   try {

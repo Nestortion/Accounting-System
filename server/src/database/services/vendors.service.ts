@@ -1,7 +1,7 @@
 import db from "../index.ts";
 import crypto from "crypto";
 import vendors from "../schema/vendors.schema.ts";
-import { eq } from "drizzle-orm";
+import { eq, not } from "drizzle-orm";
 
 export const getAllVendors = async () => {
   const vendors = await db.query.vendors.findMany();
@@ -14,7 +14,6 @@ export const addVendor = async (input: {
   vdContactInfo: string;
   vdAddress: string;
   vdEmail: string;
-  vdIsActive: boolean;
 }) => {
   const newVendorId = `vdId ${crypto.randomUUID()}`;
 
@@ -27,14 +26,13 @@ export const addVendor = async (input: {
   return newVendor;
 };
 
-export const updateVendor = async (input: {
+export const editVendor = async (input: {
   vdId: string;
   newData: {
     vdName?: string;
     vdContactInfo?: string;
     vdAddress?: string;
     vdEmail?: string;
-    vdIsActive?: boolean;
   };
 }) => {
   await db
@@ -42,17 +40,17 @@ export const updateVendor = async (input: {
     .set(input.newData)
     .where(eq(vendors.vdId, input.vdId));
 
-  const updatedVd = await db.query.vendors.findFirst({
+  const editedVd = await db.query.vendors.findFirst({
     where: (vd) => eq(vd.vdId, input.vdId),
   });
 
-  return updatedVd;
+  return editedVd;
 };
 
-export const toggleVendorIsActive = async (input: { vdId: string }) => {
+export const toggleIsActive = async (input: { vdId: string }) => {
   await db
     .update(vendors)
-    .set({ vdIsActive: !vendors.vdIsActive })
+    .set({ vdIsActive: not(vendors.vdIsActive) })
     .where(eq(vendors.vdId, input.vdId));
 
   const updatedVd = await db.query.vendors.findFirst({

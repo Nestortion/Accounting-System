@@ -18,6 +18,6 @@ vendorRouter.post("/", createVendor);
 vendorRouter.put("/", updateVendor);
 
 //Toggle vendor is active for soft deletion
-vendorRouter.put("/:custId", toggleVendorIsActive);
+vendorRouter.put("/:vdId", toggleVendorIsActive);
 
 export default vendorRouter;

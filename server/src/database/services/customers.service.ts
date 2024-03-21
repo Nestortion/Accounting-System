@@ -1,7 +1,7 @@
 import db from "../index.ts";
 import crypto from "crypto";
 import customers from "../schema/customers.schema.ts";
-import { eq } from "drizzle-orm";
+import { eq, not } from "drizzle-orm";
 
 export const getAllCustomers = async () => {
   const customers = await db.query.customers.findMany();
@@ -51,7 +51,7 @@ export const editCustomer = async (input: {
 export const updateCustomerIsActive = async (input: { custId: string }) => {
   await db
     .update(customers)
-    .set({ custIsActive: !customers.custIsActive })
+    .set({ custIsActive: not(customers.custIsActive) })
     .where(eq(customers.custId, input.custId));
 
   const updatedCust = await db.query.customers.findFirst({

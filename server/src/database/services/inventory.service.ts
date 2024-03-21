@@ -35,7 +35,7 @@ export const addInventory = async (input: {
   return newInventory;
 };
 
-export const updateInventory = async (input: {
+export const editInventory = async (input: {
   invId: string;
   newData: {
     invAssetName?: string;
@@ -48,9 +48,9 @@ export const updateInventory = async (input: {
     .set(input.newData)
     .where(eq(inventory.invId, input.invId));
 
-  const updatedInv = await db.query.inventory.findFirst({
+  const editedInv = await db.query.inventory.findFirst({
     where: (inv) => eq(inv.invId, input.invId),
   });
 
-  return updatedInv;
+  return editedInv;
 };

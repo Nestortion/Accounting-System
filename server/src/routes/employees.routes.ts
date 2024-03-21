@@ -18,6 +18,6 @@ employeesRouter.post("/", createEmployee);
 employeesRouter.put("/", updateEmployee);
 
 //delete but update employees isactive instead
-employeesRouter.put("/:employeesID", terminateEmployee);
+employeesRouter.put("/:empId", terminateEmployee);
 
 export default employeesRouter;

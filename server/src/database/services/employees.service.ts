@@ -30,7 +30,7 @@ export const addEmployee = async (input: {
   return newEmployee;
 };
 
-export const updateEmployee = async (input: {
+export const editEmployee = async (input: {
   empId: string;
   newData: {
     empName?: string;
@@ -48,22 +48,22 @@ export const updateEmployee = async (input: {
     .set(input.newData)
     .where(eq(employees.empId, input.empId));
 
-  const updatedEmp = await db.query.employees.findFirst({
+  const editedEmployee = await db.query.employees.findFirst({
     where: (emp) => eq(emp.empId, input.empId),
   });
 
-  return updatedEmp;
+  return editedEmployee;
 };
 
-export const terminateEmployee = async (input: { empId: string }) => {
+export const fireEmployee = async (input: { empId: string }) => {
   await db
     .update(employees)
     .set({ empDateTerminated: new Date() })
     .where(eq(employees.empId, input.empId));
 
-  const updatedEmp = await db.query.employees.findFirst({
+  const firedEmployee = await db.query.employees.findFirst({
     where: (emp) => eq(emp.empId, input.empId),
   });
 
-  return updatedEmp;
+  return firedEmployee;
 };

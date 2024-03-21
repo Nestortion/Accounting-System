@@ -40,7 +40,7 @@ export const updateValidator = z.object({
     if (val.split(" ")[0] !== "chqId") {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: `Not an account id.`,
+        message: `Not an cheque id.`,
       });
     }
     if (!z.string().uuid().safeParse(val.split(" ")[1]).success) {

@@ -9,7 +9,7 @@ import {
   createValidator,
   toggleIsActiveValidator,
   updateValidator,
-} from "../utils/account.validator";
+} from "../utils/validators/accounts.validator";
 
 export const getAccounts = async (req: Request, res: Response) => {
   try {
