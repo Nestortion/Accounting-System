@@ -7,6 +7,7 @@ import inventoryRouter from "./routes/inventory.routes";
 import payrollRouter from "./routes/payrolls.routes";
 import transactionRouter from "./routes/transactions.routes";
 import vendorRouter from "./routes/vendors.routes";
+import customerRouter from "./routes/customers.routes";
 
 const app = express();
 
@@ -17,6 +18,9 @@ app.use("/accounts", accountRouter);
 
 //route for all employee actions
 app.use("/employees", employeesRouter);
+
+//route for all customer actions
+app.use("/customers", customerRouter);
 
 //route for all user actions
 app.use("/users", usersRouter);
