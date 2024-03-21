@@ -12,10 +12,14 @@ const payrolls = mysqlTable("payrolls", {
   prEmployeeId: varchar("pr_employee_id", { length: 60 })
     .references((): AnyMySqlColumn => employees.empId, { onDelete: "cascade" })
     .notNull(),
-  prTotalDeduction: decimal("pr_total_deduction").$type<number>().notNull(),
+  prTotalDeduction: decimal("pr_total_deduction", { precision: 13, scale: 2 })
+    .$type<number>()
+    .notNull(),
   prDateFrom: date("pr_date_from").notNull(),
   prDateTo: date("pr_date_to").notNull(),
-  prFinalAmount: decimal("pr_final_amount").$type<number>().notNull(),
+  prFinalAmount: decimal("pr_final_amount", { precision: 13, scale: 2 })
+    .$type<number>()
+    .notNull(),
 });
 
 export default payrolls;
