@@ -11,10 +11,9 @@ export const getAllCustomers = async () => {
 
 export const addCustomer = async (input: {
   custName: string;
-  custContactInfo: number;
+  custContactInfo: string;
   custAddress: string;
   custEmail: string;
-  custIsActive: boolean;
 }) => {
   const newCustomerId = `custId ${crypto.randomUUID()}`;
 
@@ -27,11 +26,11 @@ export const addCustomer = async (input: {
   return newCustomer;
 };
 
-export const updateCustomer = async (input: {
+export const editCustomer = async (input: {
   custId: string;
   newData: {
     custName?: string;
-    custContactInfo?: number;
+    custContactInfo?: string;
     custAddress?: string;
     custEmail?: string;
     custIsActive?: boolean;
@@ -49,7 +48,7 @@ export const updateCustomer = async (input: {
   return updatedCust;
 };
 
-export const toggleCustomerIsActive = async (input: { custId: string }) => {
+export const updateCustomerIsActive = async (input: { custId: string }) => {
   await db
     .update(customers)
     .set({ custIsActive: !customers.custIsActive })
