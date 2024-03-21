@@ -17,7 +17,7 @@ const transactions = mysqlTable("transactions", {
     .references((): AnyMySqlColumn => accounts.accId, { onDelete: "cascade" })
     .notNull(),
   tranDescription: text("tran_description").notNull(),
-  tranAmount: decimal("tran_amount").notNull(),
+  tranAmount: decimal("tran_amount").$type<number>().notNull(),
   tranEmpId: varchar("tran_employee_id", { length: 60 }).references(
     (): AnyMySqlColumn => employees.empId,
     { onDelete: "cascade" }

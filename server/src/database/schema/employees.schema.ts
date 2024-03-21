@@ -8,7 +8,7 @@ const employees = mysqlTable("employees", {
   empBirthdate: date("emp_birthdate").notNull(),
   empDateHired: date("emp_date_hired").notNull(),
   empDateTerminated: date("emp_date_terminated").notNull(),
-  empSalary: decimal("emp_salary").notNull(),
+  empSalary: decimal("emp_salary").$type<number>().notNull(),
 });
 
 export default employees;
