@@ -1,11 +1,15 @@
 import { Request, Response } from "express";
-import z from "zod";
 import {
   addAccount,
   editAccount,
   getAllAccounts,
   updateAccountIsActive,
 } from "../database/services/accounts.service";
+import {
+  createValidator,
+  toggleIsActiveValidator,
+  updateValidator,
+} from "../utils/account.validator";
 
 export const getAccounts = async (req: Request, res: Response) => {
   try {
@@ -19,13 +23,7 @@ export const getAccounts = async (req: Request, res: Response) => {
   }
 };
 export const createAccount = async (req: Request, res: Response) => {
-  const inputSchema = z.object({
-    accType: z.enum(["PAYABLE", "RECEIVABLE", "EXPENSE", "REVENUE"]),
-    accDescription: z.string(),
-    accAmount: z.number(),
-  });
-
-  const input = inputSchema.safeParse(req.body);
+  const input = createValidator.safeParse(req.body);
 
   if (!input.success) return res.status(400).send({ error: "invalid input" });
 
@@ -41,31 +39,7 @@ export const createAccount = async (req: Request, res: Response) => {
 };
 
 export const updateAccount = async (req: Request, res: Response) => {
-  const inputSchema = z.object({
-    accId: z.string().superRefine((val, ctx) => {
-      if (val.split(" ")[0] !== "accId") {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: `Not an account id.`,
-        });
-      }
-      if (!z.string().uuid().safeParse(val.split(" ")[1]).success) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: `Not valid uuid.`,
-        });
-      }
-    }),
-    newData: z.object({
-      accType: z.optional(
-        z.enum(["PAYABLE", "RECEIVABLE", "EXPENSE", "REVENUE"])
-      ),
-      accDescription: z.optional(z.string()),
-      accAmount: z.optional(z.number()),
-    }),
-  });
-
-  const input = inputSchema.safeParse(req.body);
+  const input = updateValidator.safeParse(req.body);
 
   if (!input.success)
     return res.status(400).send({
@@ -81,24 +55,7 @@ export const updateAccount = async (req: Request, res: Response) => {
   }
 };
 export const toggleAccountIsActive = async (req: Request, res: Response) => {
-  const inputSchema = z.object({
-    accId: z.string().superRefine((val, ctx) => {
-      if (val.split(" ")[0] !== "accId") {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: `Not an account id.`,
-        });
-      }
-      if (!z.string().uuid().safeParse(val.split(" ")[1]).success) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: `Not valid uuid.`,
-        });
-      }
-    }),
-  });
-
-  const input = inputSchema.safeParse(req.params);
+  const input = toggleIsActiveValidator.safeParse(req.params);
 
   if (!input.success)
     return res.status(400).send({

@@ -4,7 +4,7 @@ import {
   editCheque,
   getAllCheques,
 } from "../database/services/cheques.service";
-import z from "zod";
+import { createValidator, updateValidator } from "../utils/cheque.validator";
 
 export const getCheques = async (req: Request, res: Response) => {
   try {
@@ -15,40 +15,7 @@ export const getCheques = async (req: Request, res: Response) => {
   }
 };
 export const createCheque = async (req: Request, res: Response) => {
-  const inputSchema = z.object({
-    chqPayeeName: z.string(),
-    chqAmount: z.number(),
-    chqIssueDate: z
-      .string()
-      .datetime()
-      .transform((date) => new Date(date)),
-    chqDescription: z.string(),
-    chqStatus: z.enum(["APPROVED", "PENDING", "REJECTED"]),
-    chqAccId: z.string().superRefine((val, ctx) => {
-      if (val.split(" ")[0] !== "accId") {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: `Not an account id.`,
-        });
-      }
-      if (!z.string().uuid().safeParse(val.split(" ")[1]).success) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: `Not valid uuid.`,
-        });
-      }
-    }),
-    chqCreatedAt: z
-      .string()
-      .datetime()
-      .transform((date) => new Date(date)),
-    chqUpdatedAt: z
-      .string()
-      .datetime()
-      .transform((date) => new Date(date)),
-  });
-
-  const input = inputSchema.safeParse(req.body);
+  const input = createValidator.safeParse(req.body);
 
   if (!input.success) return res.status(400).send({ error: "invalid inputs" });
 
@@ -63,64 +30,7 @@ export const createCheque = async (req: Request, res: Response) => {
   }
 };
 export const updateCheque = async (req: Request, res: Response) => {
-  const inputSchema = z.object({
-    chqId: z.string().superRefine((val, ctx) => {
-      if (val.split(" ")[0] !== "chqId") {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: `Not an account id.`,
-        });
-      }
-      if (!z.string().uuid().safeParse(val.split(" ")[1]).success) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: `Not valid uuid.`,
-        });
-      }
-    }),
-    newData: z.object({
-      chqPayeeName: z.optional(z.string()),
-      chqAmount: z.optional(z.number()),
-      chqIssueDate: z.optional(
-        z
-          .string()
-          .datetime()
-          .transform((date) => new Date(date))
-      ),
-      chqDescription: z.optional(z.string()),
-      chqStatus: z.optional(z.enum(["APPROVED", "PENDING", "REJECTED"])),
-      chqAccId: z.optional(
-        z.string().superRefine((val, ctx) => {
-          if (val.split(" ")[0] !== "accId") {
-            ctx.addIssue({
-              code: z.ZodIssueCode.custom,
-              message: `Not an account id.`,
-            });
-          }
-          if (!z.string().uuid().safeParse(val.split(" ")[1]).success) {
-            ctx.addIssue({
-              code: z.ZodIssueCode.custom,
-              message: `Not valid uuid.`,
-            });
-          }
-        })
-      ),
-      chqCreatedAt: z.optional(
-        z
-          .string()
-          .datetime()
-          .transform((date) => new Date(date))
-      ),
-      chqUpdatedAt: z.optional(
-        z
-          .string()
-          .datetime()
-          .transform((date) => new Date(date))
-      ),
-    }),
-  });
-
-  const input = inputSchema.safeParse(req.body);
+  const input = updateValidator.safeParse(req.body);
 
   if (!input.success) return res.status(400).send({ error: "invalid inputs" });
 
