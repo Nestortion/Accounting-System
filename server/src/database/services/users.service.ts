@@ -18,6 +18,14 @@ export const getAllUsers = async () => {
   return users;
 };
 
+export const getUserById = async (input: { userId: string }) => {
+  const userData = await db.query.users.findFirst({
+    where: (user) => eq(user.userId, input.userId),
+  });
+
+  return userData;
+};
+
 export const addUser = async (input: {
   userType: UserType;
   userUsername: string;
