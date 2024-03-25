@@ -15,12 +15,10 @@ import {
 import { LiaMoneyCheckAltSolid } from 'react-icons/lia'
 import { MdOutlineInventory2 } from 'react-icons/md'
 import { TbReceiptTax } from 'react-icons/tb'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@radix-ui/react-popover'
+
 import { Link } from '@tanstack/react-router'
+import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
+import { HomeIcon } from 'lucide-react'
 
 function Header() {
   return (
@@ -78,19 +76,19 @@ function Header() {
 
         <SheetContent side={'left'} className="flex flex-col justify-center">
           <Link to="/">
-            <SheetClose asChild>
+            <SheetClose>
               <Text
                 variant={'heading1'}
                 style={'underline'}
                 className="flex gap-4 items-center"
               >
-                <FaMoneyBillTrendUp />
+                <HomeIcon />
                 Home
               </Text>
             </SheetClose>
           </Link>
           <Link to="/sales">
-            <SheetClose asChild>
+            <SheetClose>
               <Text
                 variant={'heading1'}
                 style={'underline'}
@@ -102,7 +100,7 @@ function Header() {
             </SheetClose>
           </Link>
           <Link to="/employees">
-            <SheetClose asChild>
+            <SheetClose>
               <Text
                 variant={'heading1'}
                 style={'underline'}
