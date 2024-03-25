@@ -5,7 +5,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet'
 import { Text } from './ui/text'
-import { RxBell, RxDotsVertical, RxGear, RxHamburgerMenu } from 'react-icons/rx'
+import { RxBell, RxGear, RxHamburgerMenu } from 'react-icons/rx'
 import {
   FaMoneyBillTransfer,
   FaMoneyBillTrendUp,
@@ -17,8 +17,16 @@ import { MdOutlineInventory2 } from 'react-icons/md'
 import { TbReceiptTax } from 'react-icons/tb'
 
 import { Link } from '@tanstack/react-router'
-import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
-import { HomeIcon } from 'lucide-react'
+import { HomeIcon, LogOutIcon, SettingsIcon } from 'lucide-react'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from './ui/dropdown-menu'
+import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 
 function Header() {
   return (
@@ -47,29 +55,40 @@ function Header() {
               <RxBell size={40} />
             </div>
             <div className="ml-4">
-              <Popover>
-                <PopoverTrigger asChild>
-                  <div>
-                    <RxDotsVertical size={40} />
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <div className="hover:cursor-pointer">
+                    <Avatar>
+                      <AvatarImage src="https://github.com/nestortion.png" />
+                      <AvatarFallback>NG</AvatarFallback>
+                    </Avatar>
                   </div>
-                </PopoverTrigger>
-                <PopoverContent className="w-80">
-                  <div className="grid gap-4">
-                    <div className="space-y-2">
-                      <h4 className="font-medium leading-none">Dimensions</h4>
-                      <p className="text-sm text-muted-foreground">
-                        Set the dimensions for the layer.
-                      </p>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-64">
+                  <DropdownMenuLabel>
+                    <div className="flex gap-4 items-center">
+                      <Avatar>
+                        <AvatarImage src="https://github.com/nestortion.png" />
+                        <AvatarFallback>NG</AvatarFallback>
+                      </Avatar>
+                      <div>Nestor P. Gerona</div>
                     </div>
-                    <div className="grid gap-2">
-                      <div className="grid grid-cols-3 items-center gap-4"></div>
-                      <div className="grid grid-cols-3 items-center gap-4"></div>
-                      <div className="grid grid-cols-3 items-center gap-4"></div>
-                      <div className="grid grid-cols-3 items-center gap-4"></div>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem className="flex gap-4 hover:cursor-pointer">
+                    <div>
+                      <SettingsIcon />
                     </div>
-                  </div>
-                </PopoverContent>
-              </Popover>
+                    <div>Settings</div>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="flex gap-4 hover:cursor-pointer">
+                    <div>
+                      <LogOutIcon />
+                    </div>
+                    <div>Logout</div>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
         </div>
