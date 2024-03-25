@@ -12,11 +12,53 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
+import { Route as TaxesIndexImport } from './routes/taxes_/index'
+import { Route as SalesIndexImport } from './routes/sales_/index'
+import { Route as ReportsIndexImport } from './routes/reports_/index'
+import { Route as PayrollsIndexImport } from './routes/payrolls_/index'
+import { Route as InventoryIndexImport } from './routes/inventory_/index'
+import { Route as EmployeesIndexImport } from './routes/employees_/index'
+import { Route as ChequesIndexImport } from './routes/cheques_/index'
 
 // Create/Update Routes
 
 const IndexRoute = IndexImport.update({
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const TaxesIndexRoute = TaxesIndexImport.update({
+  path: '/taxes/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const SalesIndexRoute = SalesIndexImport.update({
+  path: '/sales/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ReportsIndexRoute = ReportsIndexImport.update({
+  path: '/reports/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PayrollsIndexRoute = PayrollsIndexImport.update({
+  path: '/payrolls/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const InventoryIndexRoute = InventoryIndexImport.update({
+  path: '/inventory/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const EmployeesIndexRoute = EmployeesIndexImport.update({
+  path: '/employees/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ChequesIndexRoute = ChequesIndexImport.update({
+  path: '/cheques/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -28,11 +70,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/cheques/': {
+      preLoaderRoute: typeof ChequesIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/employees/': {
+      preLoaderRoute: typeof EmployeesIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/inventory/': {
+      preLoaderRoute: typeof InventoryIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/payrolls/': {
+      preLoaderRoute: typeof PayrollsIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/reports/': {
+      preLoaderRoute: typeof ReportsIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/sales/': {
+      preLoaderRoute: typeof SalesIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/taxes/': {
+      preLoaderRoute: typeof TaxesIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren([IndexRoute])
+export const routeTree = rootRoute.addChildren([
+  IndexRoute,
+  ChequesIndexRoute,
+  EmployeesIndexRoute,
+  InventoryIndexRoute,
+  PayrollsIndexRoute,
+  ReportsIndexRoute,
+  SalesIndexRoute,
+  TaxesIndexRoute,
+])
 
 /* prettier-ignore-end */
