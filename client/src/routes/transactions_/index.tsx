@@ -1,10 +1,10 @@
-import DataTable from '@/components/DataTable'
-import { transactionColumns } from '@/components/table-columns/transactions.columns'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader } from '@/components/ui/card'
-import { ToWords } from 'to-words'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+import DataTable from "@/components/DataTable";
+import { transactionColumns } from "@/components/table-columns/transactions.columns";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { ToWords } from "to-words";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -12,60 +12,60 @@ import {
   SelectLabel,
   SelectSeparator,
   SelectTrigger,
-} from '@/components/ui/select'
-import { Textarea } from '@/components/ui/textarea'
-import { SelectGroup, SelectValue } from '@radix-ui/react-select'
-import { createFileRoute } from '@tanstack/react-router'
-import { useState } from 'react'
-import DatePicker from '@/components/ui/DatePicker'
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { SelectGroup, SelectValue } from "@radix-ui/react-select";
+import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import DatePicker from "@/components/ui/DatePicker";
 
 const toWords = new ToWords({
-  localeCode: 'en-IN',
+  localeCode: "en-IN",
   converterOptions: {
     currency: true,
     ignoreDecimal: false,
     ignoreZeroCurrency: false,
     doNotAddOnly: true,
     currencyOptions: {
-      name: 'Pesos',
-      plural: 'Pesos',
-      symbol: '₱',
+      name: "Pesos",
+      plural: "Pesos",
+      symbol: "₱",
       fractionalUnit: {
-        name: 'Centavo',
-        plural: 'Centavos',
-        symbol: '',
+        name: "Centavo",
+        plural: "Centavos",
+        symbol: "",
       },
     },
   },
-})
+});
 
-export const Route = createFileRoute('/transactions/')({
+export const Route = createFileRoute("/transactions/")({
   component: Transactions,
-})
+});
 
 const data = {
-  tranAccId: 'accId',
+  tranAccId: "accId",
   tranAmount: 200,
   tranCreatedAt: new Date().toLocaleDateString(),
   tranUpdatedAt: new Date().toLocaleDateString(),
-  tranDescription: 'descrip',
-  tranId: 'tranId',
+  tranDescription: "descrip",
+  tranId: "tranId",
   tranTransactionDate: new Date().toLocaleDateString(),
-  tranCustId: 'custId',
-  tranEmpId: 'empId',
-  tranVdId: 'vdId',
-}
+  tranCustId: "custId",
+  tranEmpId: "empId",
+  tranVdId: "vdId",
+};
 
 function Transactions() {
-  const [person, setPerson] = useState<string>('')
+  const [person, setPerson] = useState<string>("");
   const manyData = (() => {
-    let many: Array<typeof data> = []
+    let many: Array<typeof data> = [];
 
     for (let i = 0; i < 50; i++) {
-      many.push(data)
+      many.push(data);
     }
-    return many
-  })()
+    return many;
+  })();
   return (
     <div className="p-4 min-h-[85vh] items-center flex flex-col gap-8">
       <DataTable
@@ -75,10 +75,10 @@ function Transactions() {
         data={manyData}
       />
       <div className="flex gap-4 flex-col md:flex-row w-full md:w-[70vw]">
-        <Card className="w-full overflow-y-auto">
+        <Card className="flex-1 overflow-y-auto">
           <CardHeader>Receipt Preview</CardHeader>
           <CardContent className="flex flex-col gap-4">
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center text-center">
               <span>5L Solutions Supply & Allied Services Corp.</span>
               <span>
                 B19 L12 P3B, Pacita Complex 1, San Francisco, Biñan, Laguna
@@ -87,22 +87,23 @@ function Transactions() {
             </div>
             <div className="flex flex-col items-center">
               <b>Receipt of Payment</b>
-              <div className="flex justify-evenly w-full">
-                <div>
-                  <div className="flex flex-col h-40">
-                    <div className="flex-1">
+              <div className="flex justify-evenly w-full gap-1">
+                <div className="flex-1 flex flex-col h-40">
+                  <div>
+                    <div>
                       {new Date().toLocaleDateString()}
                       <div>{toWords.convert(100)}</div>
                     </div>
                     <div>
-                      From: 5L Solutions Supply and Allied Services Corp.
+                      From: <br />
+                      5L Solutions Supply and Allied Services Corp.
                       <div>___________________</div>
                       <div>Signature Over Printed Name</div>
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-col h-40">
-                  <div className="flex-1">₱100</div>
+                <div className="flex-1 flex flex-col h-40">
+                  <div>₱100</div>
                   <div>
                     Received by: Nestor
                     <div>___________________</div>
@@ -114,7 +115,7 @@ function Transactions() {
             </div>
           </CardContent>
         </Card>
-        <Card className="w-full ">
+        <Card className="flex-1">
           <CardHeader>Create Transaction</CardHeader>
           <CardContent className="flex flex-col gap-4">
             <div className="flex gap-4">
@@ -164,7 +165,7 @@ function Transactions() {
             </div>
             <div className="flex w-full gap-4">
               <Button className="flex-1">Submit</Button>
-              <Button className="flex-1" variant={'outline'}>
+              <Button className="flex-1" variant={"outline"}>
                 Clear
               </Button>
             </div>
@@ -172,7 +173,7 @@ function Transactions() {
         </Card>
       </div>
     </div>
-  )
+  );
 }
 
-export default Transactions
+export default Transactions;

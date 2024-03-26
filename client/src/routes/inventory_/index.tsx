@@ -1,39 +1,39 @@
-import DataTable from '@/components/DataTable'
+import DataTable from "@/components/DataTable";
 import {
   Inventories,
   inventoryColumns,
-} from '@/components/table-columns/inventory.columns'
-import { createFileRoute } from '@tanstack/react-router'
+} from "@/components/table-columns/inventory.columns";
+import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute('/inventory/')({
+export const Route = createFileRoute("/inventory/")({
   component: Inventory,
-})
+});
 
 const data: Inventories = {
-  invAssetName: 'Asset Name',
-  invId: 'Inv Id',
-  invStatus: 'GOOD',
+  invAssetName: "Asset Name",
+  invId: "Inv Id",
+  invStatus: "GOOD",
   invStocks: 200,
-}
+};
 
 function Inventory() {
   const manyData = (() => {
-    let many: Array<typeof data> = []
+    let many: Array<typeof data> = [];
 
     for (let i = 0; i < 50; i++) {
-      many.push(data)
+      many.push(data);
     }
-    return many
-  })()
+    return many;
+  })();
   return (
-    <div className="min-h-[85vh] flex flex-col items-center">
+    <div className="p-4 min-h-[85vh] flex flex-col items-center">
       <DataTable
-        className="md:w-[70vw]"
+        className="w-full md:w-[70vw]"
         columns={inventoryColumns}
         data={manyData}
       ></DataTable>
     </div>
-  )
+  );
 }
 
-export default Inventory
+export default Inventory;
