@@ -35,8 +35,12 @@ function Employees() {
   })()
 
   return (
-    <div className="min-h-[85vh]">
-      <DataTable columns={employeeColumns} data={manyData}></DataTable>
+    <div className="min-h-[85vh] flex flex-col items-center">
+      <DataTable
+        className="md:w-[70vw]"
+        columns={employeeColumns}
+        data={manyData}
+      ></DataTable>
     </div>
   )
 }

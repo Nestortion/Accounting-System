@@ -26,8 +26,12 @@ function Inventory() {
     return many
   })()
   return (
-    <div>
-      <DataTable columns={inventoryColumns} data={manyData} />
+    <div className="min-h-[85vh] flex flex-col items-center">
+      <DataTable
+        className="md:w-[70vw]"
+        columns={inventoryColumns}
+        data={manyData}
+      ></DataTable>
     </div>
   )
 }

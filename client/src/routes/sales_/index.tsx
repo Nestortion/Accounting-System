@@ -2,8 +2,8 @@ import {
   salesColumns,
   type Sales,
 } from '@/components/table-columns/sales.columns'
-import SalesTable from '@/components/DataTable'
 import { createFileRoute } from '@tanstack/react-router'
+import DataTable from '@/components/DataTable'
 
 export const Route = createFileRoute('/sales/')({
   component: Sales,
@@ -35,8 +35,12 @@ function Sales() {
   })()
 
   return (
-    <div className="min-h-[85vh]">
-      <SalesTable columns={salesColumns} data={manyData} />
+    <div className="min-h-[85vh] flex flex-col items-center">
+      <DataTable
+        className="md:w-[70vw]"
+        columns={salesColumns}
+        data={manyData}
+      ></DataTable>
     </div>
   )
 }

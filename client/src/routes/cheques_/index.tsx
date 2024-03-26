@@ -31,8 +31,12 @@ function Cheques() {
   })()
 
   return (
-    <div className="min-h-[85vh]">
-      <DataTable columns={chequeColumns} data={manyData}></DataTable>
+    <div className="min-h-[85vh] flex flex-col items-center">
+      <DataTable
+        className="md:w-[70vw]"
+        columns={chequeColumns}
+        data={manyData}
+      ></DataTable>
     </div>
   )
 }
