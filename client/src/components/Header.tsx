@@ -6,18 +6,20 @@ import {
 } from '@/components/ui/sheet'
 import { Text } from './ui/text'
 import { RxBell, RxGear, RxHamburgerMenu } from 'react-icons/rx'
-import {
-  FaMoneyBillTransfer,
-  FaMoneyBillTrendUp,
-  FaPeopleGroup,
-  FaRegClipboard,
-} from 'react-icons/fa6'
-import { LiaMoneyCheckAltSolid } from 'react-icons/lia'
-import { MdOutlineInventory2 } from 'react-icons/md'
-import { TbReceiptTax } from 'react-icons/tb'
 
 import { Link } from '@tanstack/react-router'
-import { HomeIcon, LogOutIcon, SettingsIcon } from 'lucide-react'
+import {
+  ArchiveIcon,
+  ArrowLeftRightIcon,
+  BadgeDollarSignIcon,
+  ClipboardListIcon,
+  HandCoinsIcon,
+  HomeIcon,
+  LogOutIcon,
+  ReceiptIcon,
+  SettingsIcon,
+  UsersRoundIcon,
+} from 'lucide-react'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -35,7 +37,7 @@ function Header() {
         <div className="flex">
           <div className="flex-1 flex gap-4">
             <SheetTrigger asChild>
-              <div>
+              <div className="hover:cursor-pointer">
                 <RxHamburgerMenu size={40} />
               </div>
             </SheetTrigger>
@@ -113,8 +115,20 @@ function Header() {
                 style={'underline'}
                 className="flex gap-4 items-center"
               >
-                <FaMoneyBillTrendUp />
+                <BadgeDollarSignIcon />
                 Sales
+              </Text>
+            </SheetClose>
+          </Link>
+          <Link to="/transactions">
+            <SheetClose>
+              <Text
+                variant={'heading1'}
+                style={'underline'}
+                className="flex gap-4"
+              >
+                <ArrowLeftRightIcon />
+                Transactions
               </Text>
             </SheetClose>
           </Link>
@@ -125,7 +139,7 @@ function Header() {
                 style={'underline'}
                 className="flex gap-4 items-center"
               >
-                <FaPeopleGroup />
+                <UsersRoundIcon />
                 Employees
               </Text>
             </SheetClose>
@@ -137,7 +151,7 @@ function Header() {
                 style={'underline'}
                 className="flex gap-4 items-center"
               >
-                <LiaMoneyCheckAltSolid />
+                <ReceiptIcon />
                 Cheques
               </Text>
             </SheetClose>
@@ -149,7 +163,7 @@ function Header() {
                 style={'underline'}
                 className="flex gap-4 items-center"
               >
-                <FaMoneyBillTransfer />
+                <HandCoinsIcon />
                 Payrolls
               </Text>
             </SheetClose>
@@ -161,7 +175,7 @@ function Header() {
                 style={'underline'}
                 className="flex gap-4 items-center"
               >
-                <MdOutlineInventory2 />
+                <ArchiveIcon />
                 Inventory
               </Text>
             </SheetClose>
@@ -173,20 +187,8 @@ function Header() {
                 style={'underline'}
                 className="flex gap-4 items-center"
               >
-                <FaRegClipboard />
+                <ClipboardListIcon />
                 Reports
-              </Text>
-            </SheetClose>
-          </Link>
-          <Link to="/taxes">
-            <SheetClose>
-              <Text
-                variant={'heading1'}
-                style={'underline'}
-                className="flex gap-4"
-              >
-                <TbReceiptTax />
-                Taxes
               </Text>
             </SheetClose>
           </Link>

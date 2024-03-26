@@ -12,7 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
-import { Route as TaxesIndexImport } from './routes/taxes_/index'
+import { Route as TransactionsIndexImport } from './routes/transactions_/index'
 import { Route as SalesIndexImport } from './routes/sales_/index'
 import { Route as ReportsIndexImport } from './routes/reports_/index'
 import { Route as PayrollsIndexImport } from './routes/payrolls_/index'
@@ -27,8 +27,8 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const TaxesIndexRoute = TaxesIndexImport.update({
-  path: '/taxes/',
+const TransactionsIndexRoute = TransactionsIndexImport.update({
+  path: '/transactions/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -94,8 +94,8 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SalesIndexImport
       parentRoute: typeof rootRoute
     }
-    '/taxes/': {
-      preLoaderRoute: typeof TaxesIndexImport
+    '/transactions/': {
+      preLoaderRoute: typeof TransactionsIndexImport
       parentRoute: typeof rootRoute
     }
   }
@@ -111,7 +111,7 @@ export const routeTree = rootRoute.addChildren([
   PayrollsIndexRoute,
   ReportsIndexRoute,
   SalesIndexRoute,
-  TaxesIndexRoute,
+  TransactionsIndexRoute,
 ])
 
 /* prettier-ignore-end */

@@ -15,15 +15,18 @@ import {
 } from './ui/table'
 import { text } from './ui/text'
 import { Button } from './ui/button'
+import { ComponentProps, useEffect } from 'react'
 
 type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
-}
+} & ComponentProps<'div'> & { pageSize?: number }
 
 function DataTable<TData, TValue>({
   columns,
   data,
+  pageSize,
+  ...props
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
@@ -32,8 +35,12 @@ function DataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
   })
 
+  useEffect(() => {
+    if (pageSize) table.setPageSize(pageSize as number)
+  }, [])
+
   return (
-    <div>
+    <div {...props}>
       <div className="rounded-md border">
         <Table>
           <TableHeader className={`${text({ variant: 'label' })}`}>
