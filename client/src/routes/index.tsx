@@ -13,7 +13,7 @@ function Home() {
       <div className="border-b-2 border-black pb-4 mb-4">
         <Text variant={'heading1bold'}>Dashboard</Text>
       </div>
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(400px,1fr))] gap-4">
+      <div className="flex flex-col md:grid md:grid-cols-[repeat(auto-fit,minmax(400px,1fr))] gap-4">
         <Expenses />
         <Expenses />
         <Expenses />

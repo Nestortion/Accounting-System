@@ -70,11 +70,11 @@ function Transactions() {
     <div className="p-4 min-h-[85vh] items-center flex flex-col gap-8">
       <DataTable
         pageSize={5}
-        className="md:w-[70vw]"
+        className="w-full md:w-[70vw]"
         columns={transactionColumns}
         data={manyData}
       />
-      <div className="flex gap-4 flex-col md:flex-row w-[70vw]">
+      <div className="flex gap-4 flex-col md:flex-row w-full md:w-[70vw]">
         <Card className="w-full overflow-y-auto">
           <CardHeader>Receipt Preview</CardHeader>
           <CardContent className="flex flex-col gap-4">
