@@ -16,6 +16,7 @@ import {
   HandCoinsIcon,
   HomeIcon,
   LogOutIcon,
+  MoonIcon,
   ReceiptIcon,
   SettingsIcon,
   UsersRoundIcon,
@@ -29,10 +30,13 @@ import {
   DropdownMenuTrigger,
 } from './ui/dropdown-menu'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
+import { useTheme } from './ui/theme.provider'
+import { Switch } from './ui/switch'
 
 function Header() {
+  const { setTheme, theme } = useTheme()
   return (
-    <header className="h-[10vh] `z-[10] p-4 `top-0 sticky bg-white `w-screen">
+    <header className="h-[10vh] `z-[10] p-4 `top-0 sticky `w-screen">
       <Sheet>
         <div className="flex">
           <div className="flex-1 flex gap-4">
@@ -82,6 +86,19 @@ function Header() {
                       <SettingsIcon />
                     </div>
                     <div>Settings</div>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="flex gap-4 hover:cursor-pointer">
+                    <div>
+                      <MoonIcon />
+                    </div>
+                    <div>
+                      <Switch
+                        checked={theme === 'dark' ? true : false}
+                        onCheckedChange={(w) => {
+                          w ? setTheme('dark') : setTheme('light')
+                        }}
+                      />
+                    </div>
                   </DropdownMenuItem>
                   <DropdownMenuItem className="flex gap-4 hover:cursor-pointer">
                     <div>
