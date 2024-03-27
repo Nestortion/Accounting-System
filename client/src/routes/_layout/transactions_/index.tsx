@@ -1,10 +1,10 @@
-import DataTable from "@/components/DataTable";
-import { transactionColumns } from "@/components/table-columns/transactions.columns";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { ToWords } from "to-words";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import DataTable from '@/components/DataTable'
+import { transactionColumns } from '@/components/table-columns/transactions.columns'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { ToWords } from 'to-words'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import {
   Select,
   SelectContent,
@@ -12,60 +12,60 @@ import {
   SelectLabel,
   SelectSeparator,
   SelectTrigger,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { SelectGroup, SelectValue } from "@radix-ui/react-select";
-import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
-import DatePicker from "@/components/ui/DatePicker";
+} from '@/components/ui/select'
+import { Textarea } from '@/components/ui/textarea'
+import { SelectGroup, SelectValue } from '@radix-ui/react-select'
+import { createFileRoute } from '@tanstack/react-router'
+import { useState } from 'react'
+import DatePicker from '@/components/ui/DatePicker'
 
 const toWords = new ToWords({
-  localeCode: "en-IN",
+  localeCode: 'en-IN',
   converterOptions: {
     currency: true,
     ignoreDecimal: false,
     ignoreZeroCurrency: false,
     doNotAddOnly: true,
     currencyOptions: {
-      name: "Pesos",
-      plural: "Pesos",
-      symbol: "₱",
+      name: 'Pesos',
+      plural: 'Pesos',
+      symbol: '₱',
       fractionalUnit: {
-        name: "Centavo",
-        plural: "Centavos",
-        symbol: "",
+        name: 'Centavo',
+        plural: 'Centavos',
+        symbol: '',
       },
     },
   },
-});
+})
 
-export const Route = createFileRoute("/transactions/")({
+export const Route = createFileRoute('/_layout/transactions/')({
   component: Transactions,
-});
+})
 
 const data = {
-  tranAccId: "accId",
+  tranAccId: 'accId',
   tranAmount: 200,
   tranCreatedAt: new Date().toLocaleDateString(),
   tranUpdatedAt: new Date().toLocaleDateString(),
-  tranDescription: "descrip",
-  tranId: "tranId",
+  tranDescription: 'descrip',
+  tranId: 'tranId',
   tranTransactionDate: new Date().toLocaleDateString(),
-  tranCustId: "custId",
-  tranEmpId: "empId",
-  tranVdId: "vdId",
-};
+  tranCustId: 'custId',
+  tranEmpId: 'empId',
+  tranVdId: 'vdId',
+}
 
 function Transactions() {
-  const [person, setPerson] = useState<string>("");
+  const [person, setPerson] = useState<string>('')
   const manyData = (() => {
-    let many: Array<typeof data> = [];
+    let many: Array<typeof data> = []
 
     for (let i = 0; i < 50; i++) {
-      many.push(data);
+      many.push(data)
     }
-    return many;
-  })();
+    return many
+  })()
   return (
     <div className="p-4 min-h-[85vh] items-center flex flex-col gap-8">
       <DataTable
@@ -165,7 +165,7 @@ function Transactions() {
             </div>
             <div className="flex w-full gap-4">
               <Button className="flex-1">Submit</Button>
-              <Button className="flex-1" variant={"outline"}>
+              <Button className="flex-1" variant={'outline'}>
                 Clear
               </Button>
             </div>
@@ -173,7 +173,7 @@ function Transactions() {
         </Card>
       </div>
     </div>
-  );
+  )
 }
 
-export default Transactions;
+export default Transactions

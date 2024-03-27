@@ -5,7 +5,7 @@ import {
 } from "@/components/table-columns/cheques.columns";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/cheques/")({
+export const Route = createFileRoute("/_layout/cheques/")({
   component: Cheques,
 });
 

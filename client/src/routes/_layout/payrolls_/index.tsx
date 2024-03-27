@@ -1,31 +1,31 @@
-import DataTable from "@/components/DataTable";
+import DataTable from '@/components/DataTable'
 import {
   payrollColumns,
   type Payrolls,
-} from "@/components/table-columns/payrolls.columns";
-import { createFileRoute } from "@tanstack/react-router";
+} from '@/components/table-columns/payrolls.columns'
+import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute("/payrolls/")({
+export const Route = createFileRoute('/_layout/payrolls/')({
   component: Payrolls,
-});
+})
 
 const data: Payrolls = {
   prDateFrom: new Date().toLocaleDateString(),
   prDateTo: new Date().toLocaleDateString(),
-  prEmpName: "Nestor Gerona",
+  prEmpName: 'Nestor Gerona',
   prFinalAmount: 1000,
   prTotalDeduction: 200,
-};
+}
 
 function Payrolls() {
   const manyData = (() => {
-    let many: Array<typeof data> = [];
+    let many: Array<typeof data> = []
 
     for (let i = 0; i < 50; i++) {
-      many.push(data);
+      many.push(data)
     }
-    return many;
-  })();
+    return many
+  })()
   return (
     <div className="p-4 min-h-[85vh] flex flex-col items-center">
       <DataTable
@@ -34,7 +34,7 @@ function Payrolls() {
         data={manyData}
       ></DataTable>
     </div>
-  );
+  )
 }
 
-export default Payrolls;
+export default Payrolls
