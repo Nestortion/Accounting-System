@@ -44,6 +44,7 @@ function login() {
                 <Label>Username</Label>
                 <Input
                   className="w-full"
+                  type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                 />
@@ -52,6 +53,7 @@ function login() {
                 <Label>Password</Label>
                 <Input
                   className="w-full"
+                  type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
