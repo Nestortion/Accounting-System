@@ -6,7 +6,6 @@ import {
 } from '@/components/ui/sheet'
 import { Text } from './ui/text'
 import { RxBell, RxGear, RxHamburgerMenu } from 'react-icons/rx'
-
 import { Link } from '@tanstack/react-router'
 import {
   ArchiveIcon,
@@ -100,12 +99,14 @@ function Header() {
                       />
                     </div>
                   </DropdownMenuItem>
-                  <DropdownMenuItem className="flex gap-4 hover:cursor-pointer">
-                    <div>
-                      <LogOutIcon />
-                    </div>
-                    <div>Logout</div>
-                  </DropdownMenuItem>
+                  <Link to="/login">
+                    <DropdownMenuItem className="flex gap-4 hover:cursor-pointer">
+                      <div>
+                        <LogOutIcon />
+                      </div>
+                      <div>Logout</div>
+                    </DropdownMenuItem>
+                  </Link>
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
